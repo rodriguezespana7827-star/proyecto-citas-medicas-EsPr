@@ -1,11 +1,15 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const citasRouter = require('./routes/citas');
 
 const app = express();
 app.use(express.json());
 
-app.get('/', (_req, res) => {
+// Publica la interfaz gráfica desde la carpeta public.
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.get('/api', (_req, res) => {
   res.json({
     mensaje: 'API de Citas Médicas funcionando',
     rutas: {

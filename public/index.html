@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#126e63">
+  <title>Clínica Serena | Citas médicas</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Clínica Serena, inicio">
+      <span class="brand-mark" aria-hidden="true">✚</span>
+      <span><strong>Clínica Serena</strong><small>Atención que te acompaña</small></span>
+    </a>
+    <span class="top-tag"><span class="live-dot"></span> Sistema de citas</span>
+  </header>
+
+  <main class="layout" id="inicio">
+    <section class="welcome">
+      <div class="welcome-copy">
+        <p class="eyebrow">GESTIÓN DE ATENCIÓN MÉDICA</p>
+        <h1>Tu salud merece<br><span>tiempo y cuidado.</span></h1>
+        <p class="intro">Organiza tus consultas en un solo lugar. Registra una cita y consulta su estado fácilmente.</p>
+        <div class="welcome-note"><span aria-hidden="true">♡</span> Una mejor organización comienza con una cita.</div>
+      </div>
+      <div class="welcome-art" aria-hidden="true">
+        <div class="art-circle circle-one"></div><div class="art-circle circle-two"></div>
+        <div class="medical-card"><span class="medical-cross">✚</span><span class="pulse-line">⌁⌁⌁⌁</span><span class="card-label">CUIDADO<br>PERSONAL</span></div>
+        <span class="spark spark-one">✦</span><span class="spark spark-two">✧</span>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Resumen de citas">
+      <article class="stat-card"><span class="stat-icon total-icon">▤</span><div><p>Total de citas</p><strong id="totalCount">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon pending-icon">◷</span><div><p>Pendientes</p><strong id="pendingCount">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon confirmed-icon">✓</span><div><p>Confirmadas</p><strong id="confirmedCount">0</strong></div></article>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel form-panel">
+        <div class="panel-heading"><div><p class="eyebrow">AGENDA PERSONAL</p><h2 id="formTitle">Agendar una cita</h2></div><span class="heading-icon">＋</span></div>
+        <p class="panel-description">Completa los datos para registrar una consulta médica.</p>
+        <form id="appointmentForm">
+          <input type="hidden" id="appointmentId">
+          <label for="paciente">Nombre del paciente</label>
+          <input id="paciente" name="paciente" type="text" maxlength="100" placeholder="Ej. Daniela Mera" required>
+          <label for="medico">Nombre del médico</label>
+          <input id="medico" name="medico" type="text" maxlength="100" placeholder="Ej. Dra. Ana Torres" required>
+          <div class="field-row">
+            <div><label for="fecha">Fecha</label><input id="fecha" name="fecha" type="date" required></div>
+            <div><label for="hora">Hora</label><input id="hora" name="hora" type="time" required></div>
+          </div>
+          <label for="motivo">Motivo de la consulta</label>
+          <textarea id="motivo" name="motivo" rows="3" maxlength="255" placeholder="Describe brevemente el motivo" required></textarea>
+          <label for="estado">Estado</label>
+          <select id="estado" name="estado"><option value="pendiente">Pendiente</option><option value="confirmada">Confirmada</option><option value="cancelada">Cancelada</option></select>
+          <div class="form-actions"><button class="primary-button" type="submit" id="submitButton">Guardar cita <span>↗</span></button><button class="text-button hidden" type="button" id="cancelEdit">Cancelar edición</button></div>
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel appointments-panel">
+        <div class="panel-heading list-heading"><div><p class="eyebrow">TU AGENDA</p><h2>Citas registradas</h2></div><button class="refresh-button" id="refreshButton" type="button" title="Actualizar lista" aria-label="Actualizar lista">↻</button></div>
+        <div class="toolbar"><label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Buscar paciente o médico..." aria-label="Buscar paciente o médico"></label><select id="statusFilter" aria-label="Filtrar por estado"><option value="todas">Todos los estados</option><option value="pendiente">Pendientes</option><option value="confirmada">Confirmadas</option><option value="cancelada">Canceladas</option></select></div>
+        <p id="listMessage" class="list-message" role="status" aria-live="polite">Cargando citas...</p>
+        <div id="appointmentsList" class="appointments-list"></div>
+        <div class="privacy-note"><span aria-hidden="true">ⓘ</span><p>Proyecto educativo. Utiliza datos ficticios y no ingreses información médica real.</p></div>
+      </section>
+    </section>
+    <footer>Clínica Serena · Proyecto académico de citas médicas <span>Node.js · Express · MySQL</span></footer>
+  </main>
+  <dialog id="confirmDialog" class="confirm-dialog"><form method="dialog"><h3>¿Eliminar esta cita?</h3><p>Esta acción no se puede deshacer.</p><div class="dialog-actions"><button class="text-button" value="cancel">Conservar</button><button class="danger-button" id="confirmDelete" value="default">Eliminar cita</button></div></form></dialog>
+</body>
+</html>
